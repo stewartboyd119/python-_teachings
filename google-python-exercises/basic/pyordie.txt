@@ -1,0 +1,42 @@
+    1  R2017a
+    2  /Applications/matlabroot/MATLAB_Release.app/bin.
+    3  python
+    4  /Users/lydiaboyd/instabot.py-master/example.py
+    5  py
+    6  python
+    7  python
+    8  pwd
+    9  ls
+   10  python example.py
+   11  cd
+   12  cd instabot.py-master
+   13  python example.py
+   14  vim src/userinfo.py
+   15  pkill "Touch Bar agent"
+   16  killall ControlStip
+   17  com.apple.finder ApplyShowAllFiles YES
+   18  com.apple.finder AppleShowAllFiles YES
+   19  /anaconda3/bin/jupyter_mac.command ; exit;
+   20  cd /usr/bin/
+   21  ls -a
+   22  sudo ln -s /usr/texbin/pdflatex /usr/bin/pdflatex 
+   23  sudo ln -s /usr/texbin/pdflatex /usr/bin/pdflatex 
+   24  cd /usr/bin/
+   25  ls -a
+   26  pwd
+   27  cd Documents
+   28  mkdir git
+   29  cd git
+   30  ls
+   31  git clone https://github.com/stewartboyd119/python_teachings.git
+   32  ls
+   33  cd python_teachings/
+   34  ls
+   35  cd google-python-exercises/
+   36  ls
+   37  clear
+   38  cd basic/
+   39  clear
+   40  history
+   41  clear
+   42  history > pyordie.txt
