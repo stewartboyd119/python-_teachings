@@ -3,6 +3,9 @@
 
 1. order of execution in a python file
 2. 
+## Resources
+
+1. https://developers.google.com/edu/python/
 ## Strings
 
 1. string.format
@@ -21,3 +24,20 @@
 5. extend (overload of +)
 6. in
 7. reverse
+8. sort
+9. pop
+
+# Baby Names
+## regex
+
+##Resources 
+1. https://regexr.com/
+
+Characters
+1. . 
+2. *
+3. +
+4. \
+5. []
+6. ()
+7. 
