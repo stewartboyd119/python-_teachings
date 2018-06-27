@@ -39,6 +39,25 @@ print_words() and print_top().
 
 import sys
 
+def print_words(filename):
+    #filecontents = open(filename).read()
+    with open(filename, 'r') as f:
+        filecontents = f.read()
+        words = filecontents.split(" ")
+        wordsdict = {}
+        for i in words:
+            word = i.lower()
+            if word in wordsdict:
+                wordsdict[word] += 1
+            else:
+                wordsdict[word] = 1
+        for word in wordsdict:
+            print("{} {}".format(word, wordsdict[word]))
+
+
+def print_top(filename):
+    pass
+
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
@@ -51,7 +70,7 @@ import sys
 # calls the print_words() and print_top() functions which you must define.
 def main():
   if len(sys.argv) != 3:
-    print 'usage: ./wordcount.py {--count | --topcount} file'
+    print('usage: ./wordcount.py {--count | --topcount} file')
     sys.exit(1)
 
   option = sys.argv[1]
@@ -61,8 +80,8 @@ def main():
   elif option == '--topcount':
     print_top(filename)
   else:
-    print 'unknown option: ' + option
+    print('unknown option: ' + option)
     sys.exit(1)
 
 if __name__ == '__main__':
-  main()
+  print_words()

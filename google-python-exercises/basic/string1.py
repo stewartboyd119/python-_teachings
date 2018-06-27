@@ -63,7 +63,7 @@ def fix_start(s):
 
 # D. MixUp
 # Given strings a and b, return a single string with a and b separated
-# by a space '<a> <b>', except swap the first 2 chars of each string.
+# by a space '<a> <b>', except swa5tp the first 2 chars of each string.
 # e.g.
 #   'mix', pod' -> 'pox mid'
 #   'dog', 'dinner' -> 'dig donner'
