@@ -43,21 +43,30 @@ def print_words(filename):
     #filecontents = open(filename).read()
     with open(filename, 'r') as f:
         filecontents = f.read()
-        words = filecontents.split(" ")
+        lines = filecontents.split('\n')
+        wordscombined = ''
+        for row in lines:
+            wordscombined += row + " "
+        words = wordscombined.split(" ")
         wordsdict = {}
         for i in words:
             word = i.lower()
-            if word in wordsdict:
-                wordsdict[word] += 1
-            else:
-                wordsdict[word] = 1
-        for word in wordsdict:
-            print("{} {}".format(word, wordsdict[word]))
-
+            if word != '':
+                if word in wordsdict:
+                    wordsdict[word] += 1
+                else:
+                    wordsdict[word] = 1
+        """for word in wordsdict:
+            print("{} {}".format(word, wordsdict[word]))"""
+        return wordsdict
 
 def print_top(filename):
-    pass
+    output = print_words(filename)
+    sorted_output = sorted(output.items(), key=lambda kv: kv[1])[::-1]
+    for word,count in sorted_output[:5]:
+        print(word + ", " + str(count))
 
+    
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
@@ -84,4 +93,5 @@ def main():
     sys.exit(1)
 
 if __name__ == '__main__':
-  print_words()
+  print_words("small.txt")
+  print_top("small.txt")

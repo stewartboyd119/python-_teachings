@@ -1,13 +1,13 @@
-#!/usr/bin/python
-# Copyright 2010 Google Inc.
-# Licensed under the Apache License, Version 2.0
-# http://www.apache.org/licenses/LICENSE-2.0
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jul  3 11:44:32 2018
 
-# Google's Python Class
-# http://code.google.com/edu/languages/google-python-class/
+@author: cr481e
+"""
 
 import sys
 import re
+import os
 
 """Baby Names exercise
 
@@ -40,29 +40,49 @@ def extract_names(filename):
   followed by the name-rank strings in alphabetical order.
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
-  # +++your code here+++
-  return
-
-
+  full_path = os.path.join("/Users/lydiaboyd/Downloads/",filename)
+  with open(full_path) as myfile:
+      filecontents = myfile.read()
+      
+  yearlist = re.search(r"Popularity in (\d{4})", filecontents)
+  year = yearlist.groups()[0]
+  
+  with open(full_path) as myfile:
+      lines = myfile.readlines()
+  ranklist = []
+  for line in lines:
+      if re.findall(r'"right"><td>(\d+)',line) != []:
+          ranklist += re.findall(r'"right"><td>(\d+)</td><td>(\w+)</td><td>(\w+)',line)
+  list_of_lists = [list(elem) for elem in ranklist]
+  
+  newranklist = []
+  for listy in list_of_lists:
+      listy.insert(0,str(year))
+      newranklist.append(listy)
+  print(newranklist)
+ 
 def main():
   # This command-line parsing code is provided.
   # Make a list of command line arguments, omitting the [0] element
   # which is the script itself.
-  args = sys.argv[1:]
+    args = sys.argv[1:]
 
-  if not args:
-    print 'usage: [--summaryfile] file [file ...]'
-    sys.exit(1)
+
+    if not args:
+        print('usage: [--summaryfile] file [file ...]')
+        sys.exit(1)
 
   # Notice the summary flag and remove it from args if it is present.
-  summary = False
-  if args[0] == '--summaryfile':
-    summary = True
-    del args[0]
+    summary = False
+    if args[0] == '--summaryfile':
+        summary = True
+        del args[0]
+    #extract_names("baby1990.txt")
 
   # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
   
 if __name__ == '__main__':
-  main()
+  #main()
+  extract_names("baby1990.txt")
