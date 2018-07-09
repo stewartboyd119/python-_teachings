@@ -8,6 +8,7 @@ Created on Tue Jul  3 11:44:32 2018
 import sys
 import re
 import os
+import pprint
 
 """Baby Names exercise
 
@@ -35,37 +36,38 @@ Suggested milestones for incremental development:
 """
 
 def extract_names(filename):
-  """
-  Given a file name for baby.html, returns a list starting with the year string
-  followed by the name-rank strings in alphabetical order.
-  ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
-  """
-  full_path = os.path.join("/Users/lydiaboyd/Downloads/",filename)
-  with open(full_path) as myfile:
-      filecontents = myfile.read()
+    """
+    Given a file name for baby.html, returns a list starting with the year string
+    followed by the name-rank strings in alphabetical order.
+    ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
+    """
+    #full_path = os.path.join("/Users/lydiaboyd/Documents/git/python/",filename)
+    with open(filename) as myfile:
+        filecontents = myfile.read()
       
-  yearlist = re.search(r"Popularity in (\d{4})", filecontents)
-  year = yearlist.groups()[0]
+    yearlist = re.search(r"Popularity in (\d{4})", filecontents)
+    year = yearlist.groups()[0]
   
-  with open(full_path) as myfile:
-      lines = myfile.readlines()
-  ranklist = []
-  for line in lines:
-      if re.findall(r'"right"><td>(\d+)',line) != []:
-          ranklist += re.findall(r'"right"><td>(\d+)</td><td>(\w+)</td><td>(\w+)',line)
-  list_of_lists = [list(elem) for elem in ranklist]
+    with open(filename) as myfile:
+        lines = myfile.readlines()
+    ranklist = []
+    for line in lines:
+        if re.findall(r'"right"><td>(\d+)',line) != []:
+            ranklist += re.findall(r'"right"><td>(\d+)</td><td>(\w+)</td><td>(\w+)',line)
+    list_of_lists = [list(elem) for elem in ranklist]
   
-  newranklist = []
-  for listy in list_of_lists:
-      listy.insert(0,str(year))
-      newranklist.append(listy)
-  print(newranklist)
+    newranklist = []
+    for listy in list_of_lists:
+        listy.insert(0,str(year))
+        newranklist.append(listy)
+    return newranklist
  
 def main():
   # This command-line parsing code is provided.
   # Make a list of command line arguments, omitting the [0] element
   # which is the script itself.
     args = sys.argv[1:]
+    print(args)
 
 
     if not args:
@@ -75,14 +77,25 @@ def main():
   # Notice the summary flag and remove it from args if it is present.
     summary = False
     if args[0] == '--summaryfile':
+        print("Summary is used")
         summary = True
+        summary_filename = "summary.txt"
         del args[0]
-    #extract_names("baby1990.txt")
+    newranklist = extract_names(args[0])
+
+    # write to text file
+    if summary:
+        with open(summary_filename, 'w') as fout:
+            newranklist_str = [str(liney)+"\n" for liney in newranklist]
+            fout.writelines(newranklist_str)
+    # print the results in the situation
+    else:
+        pprint.pprint(newranklist)
 
   # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
   
 if __name__ == '__main__':
-  #main()
-  extract_names("baby1990.txt")
+  main()
+  #extract_names("baby1990.html")
