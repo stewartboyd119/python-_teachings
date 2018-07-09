@@ -81,16 +81,18 @@ def main():
         summary = True
         summary_filename = "summary.txt"
         del args[0]
-    newranklist = extract_names(args[0])
+        os.remove(summary_filename)
+    for baby_name_files in args:
+        newranklist = extract_names(baby_name_files)
 
-    # write to text file
-    if summary:
-        with open(summary_filename, 'w') as fout:
-            newranklist_str = [str(liney)+"\n" for liney in newranklist]
-            fout.writelines(newranklist_str)
-    # print the results in the situation
-    else:
-        pprint.pprint(newranklist)
+        # write to text file
+        if summary:
+            with open(summary_filename, 'a') as fout:
+                newranklist_str = [str(liney)+"\n" for liney in newranklist]
+                fout.writelines(newranklist_str)
+        # print the results in the situation
+        else:
+            pprint.pprint(newranklist)
 
   # +++your code here+++
   # For each filename, get the names, then either print the text output
