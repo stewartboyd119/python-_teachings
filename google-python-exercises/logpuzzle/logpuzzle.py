@@ -34,15 +34,16 @@ def read_urls(filename):
   return undup_jpglist
 
 
-def download_images(img_urls, dest_dir):
+def download_images(img_urls, dest_path):
+  if not os.path.exists(dest_path):
+      os.makedirs(dest_path)
   domain_name = "http://code.google.com"
   for url in img_urls:
       address = domain_name + url
       contents = urllib2.urlopen(address).read()
-      with open("write_to.jpg",'wb') as myfile:
+      with open(os.path.join(dest_path, os.path.basename(address)),'wb') as myfile:
           myfile.write(contents)
 
-      break
 
   """Given the urls already in the correct order, downloads
   each image into the given directory.
@@ -76,4 +77,4 @@ def main():
 if __name__ == '__main__':
   #main()
   #print(read_urls("animal_code.google.com"))
-  download_images(read_urls("animal_code.google.com"), None)
+  download_images(read_urls("animal_code.google.com"), "./dog")
