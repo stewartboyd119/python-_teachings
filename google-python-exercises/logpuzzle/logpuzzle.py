@@ -9,7 +9,7 @@
 import os
 import re
 import sys
-import urllib
+import urllib2
 
 """Logpuzzle exercise
 Given an apache logfile, find the puzzle urls and download the images.
@@ -17,7 +17,7 @@ Given an apache logfile, find the puzzle urls and download the images.
 Here's what a puzzle url looks like:
 10.254.254.28 - - [06/Aug/2007:00:13:48 -0700] "GET /~foo/puzzle-bar-aaab.jpg HTTP/1.0" 302 528 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
 """
-def search_text(filename):
+def read_urls(filename):
 
   #os.chdir("C:\\Users\\cr481e\\names")
   #full_path = os.path.abspath(os.path.join("./",filename))
@@ -33,24 +33,16 @@ def search_text(filename):
   undup_jpglist.sort()
   return undup_jpglist
 
-def read_urls(filename):
-  """Returns a list of the puzzle urls from the given log file,
-  extracting the hostname from the filename itself.
-  Screens out duplicate urls and returns the urls sorted into
-  increasing order."""
-  # +++your code here+++
-  #open filename
-  #read in all jpgs using regex
-  #sort in abc order
-  #remove duplicates
-  #return list
 
 def download_images(img_urls, dest_dir):
+  domain_name = "http://code.google.com"
+  for url in img_urls:
+      address = domain_name + url
+      contents = urllib2.urlopen(address).read()
+      with open("write_to.jpg",'wb') as myfile:
+          myfile.write(contents)
 
-  #if ends in jpg
-  #grab text after GET
-
-
+      break
 
   """Given the urls already in the correct order, downloads
   each image into the given directory.
@@ -83,4 +75,5 @@ def main():
 
 if __name__ == '__main__':
   #main()
-  print(search_text("animal_code.google.com"))
+  #print(read_urls("animal_code.google.com"))
+  download_images(read_urls("animal_code.google.com"), None)
