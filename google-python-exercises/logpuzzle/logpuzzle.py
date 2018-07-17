@@ -20,15 +20,18 @@ Here's what a puzzle url looks like:
 def search_text(filename):
 
   #os.chdir("C:\\Users\\cr481e\\names")
-  full_path = os.path.join("C:\\Users\\cr481e",filename)
+  #full_path = os.path.abspath(os.path.join("./",filename))
+  full_path = filename
   with open(full_path) as myfile:
       lines = myfile.readlines()
   jpglist = []
   for line in lines:
-      if re.findall(r"GET (\w+.jpg)",line) != []:
-          jpglist += re.findall(r"GET (\w+.jpg)",line)
-  #list_of_lists = [list(elem) for elem in ranklist]
-  print(jpglist)
+      search = re.findall(r"GET (\S+.jpg)",line)
+      if search != []:
+          jpglist += search
+  undup_jpglist = list(set(jpglist))
+  undup_jpglist.sort()
+  return undup_jpglist
 
 def read_urls(filename):
   """Returns a list of the puzzle urls from the given log file,
@@ -79,4 +82,5 @@ def main():
     print '\n'.join(img_urls)
 
 if __name__ == '__main__':
-  main()
+  #main()
+  print(search_text("animal_code.google.com"))
