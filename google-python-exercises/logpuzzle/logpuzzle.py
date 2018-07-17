@@ -17,7 +17,18 @@ Given an apache logfile, find the puzzle urls and download the images.
 Here's what a puzzle url looks like:
 10.254.254.28 - - [06/Aug/2007:00:13:48 -0700] "GET /~foo/puzzle-bar-aaab.jpg HTTP/1.0" 302 528 "-" "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
 """
+def search_text(filename):
 
+  #os.chdir("C:\\Users\\cr481e\\names")
+  full_path = os.path.join("C:\\Users\\cr481e",filename)
+  with open(full_path) as myfile:
+      lines = myfile.readlines()
+  jpglist = []
+  for line in lines:
+      if re.findall(r"GET (\w+.jpg)",line) != []:
+          jpglist += re.findall(r"GET (\w+.jpg)",line)
+  #list_of_lists = [list(elem) for elem in ranklist]
+  print(jpglist)
 
 def read_urls(filename):
   """Returns a list of the puzzle urls from the given log file,
@@ -25,9 +36,19 @@ def read_urls(filename):
   Screens out duplicate urls and returns the urls sorted into
   increasing order."""
   # +++your code here+++
-  
+  #open filename
+  #read in all jpgs using regex
+  #sort in abc order
+  #remove duplicates
+  #return list
 
 def download_images(img_urls, dest_dir):
+
+  #if ends in jpg
+  #grab text after GET
+
+
+
   """Given the urls already in the correct order, downloads
   each image into the given directory.
   Gives the images local filenames img0, img1, and so on.
